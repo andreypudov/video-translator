@@ -22,8 +22,9 @@ def generate_subtitle(frames_dir: str, language: str, subtitle_file: str):
         end = None
 
         if result and len(result) > 0 and result[0] is not None:
-            for idx in range(len(result)):
-                res = result[idx]
+            for index in enumerate(result):
+                res = result[index]
+
                 for line in res:
                     print(line[1][0])
                     if sub == "":
