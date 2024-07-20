@@ -34,8 +34,8 @@ def generate_subtitle(frames_dir: str, language: str, subtitle_file: str):
         # Get hour, min, second from frame_h:m:s.jpg
         h = int(f.split("_")[1].split(":")[0])
         m = int(f.split("_")[1].split(":")[1])
-        a = ".".join(f.split("_")[1].split(":")[2].split(".")[:-1])
-        s = float(f"{a}")
+        s = ".".join(f.split("_")[1].split(":")[2].split(".")[:-1])
+        s = float(f"{s}")
 
         if sub == "" and prev != "":  # end of subtitle
             end = timedelta(hours=h, minutes=m, seconds=s)
