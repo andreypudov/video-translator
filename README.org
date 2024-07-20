@@ -43,4 +43,5 @@ python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --o
 python -m venv ven
 source venv/bin/activate
 pip install -r requirements.txt
+pre-commit install
 #+END_SRC
