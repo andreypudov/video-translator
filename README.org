@@ -26,6 +26,13 @@ python translate_subtitles.py --input-subtitle input.srt --output-subtitle trans
  - the language of the original subtitle file (ISO 639-1 language code)
  - the language of the output subtitle file (ISO 639-1 language code)
 
+** Example:
+
+#+BEGIN_SRC shell
+export OPENAI_API_KEY=<value>
+python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en-US --output-language ru_RU
+#+END_SRC
+
 * Using with the virtual environment
 
 #+BEGIN_SRC shell
