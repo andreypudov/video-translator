@@ -44,9 +44,9 @@ def check_arguments():
         print(f"File {args.input_subtitle} does not exist")
         exit(1)
 
-        if os.path.isfile(args.output_subtitle):
-            print(f"File {args.output_subtitle} already exists")
-            exit(1)
+    if os.path.isfile(args.output_subtitle):
+        print(f"File {args.output_subtitle} already exists")
+        exit(1)
 
 
 def translate(client, text, input_language, output_language):
@@ -82,7 +82,7 @@ def translate_subtitle(input_subtitle, input_language, output_language):
 
         for sub in input_subtitles:
             translation = translate(
-                client, sub.content, args.input_language, args.output_language
+                client, sub.content, input_language, output_language
             )
 
             print(f"Subtitle: {sub.content}")
