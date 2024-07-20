@@ -5,3 +5,7 @@ pre-commit==3.7.1
 setuptools==69.5.1
 srt==3.5.3
 wheel==0.43.0
+paddleocr==2.8.1
+paddlepaddle==2.6.1
+opencv-python==4.10.0.84
+srt==3.5.3
