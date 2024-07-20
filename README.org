@@ -4,24 +4,32 @@
 #+AUTHOR: Andrey Pudov
 #+AUTHOR: Pei Pei Chen
 
-* How to generate the subtitle file
+* Generate the subtitles file a video file
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt --input-language zh-CN --subtitle-area 90
 #+END_SRC
 
  - the file name of the video to be processed
- - the file name of the output subtitle
+ - the file name of the output subtitles
  - the language of the subtitles in the video
  - the area of the subtitles on the frame (in percentage from the top left corner)
 
-* How to translate the subtitle file
+* Translate subtitles
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 python translate_subtitles.py --input-subtitle input.srt --output-subtitle translated.srt --input-language zh-CN --output-language ru-RU
 #+END_SRC
 
- - the file name of the original subtitle file
+ - the file name of the original subtitl file
  - the file name of the output subtitle file
  - the language of the original subtitle file (ISO 639-1 language code)
  - the language of the output subtitle file (ISO 639-1 language code)
+
+* Using with the virtual environment
+
+#+BEGIN_SRC shell
+python -m venv ven
+source venv/bin/activate
+pip install -r requirements.txt
+#+END_SRC
