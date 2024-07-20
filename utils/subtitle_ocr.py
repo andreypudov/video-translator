@@ -49,6 +49,5 @@ def generate_subtitle(frames_dir: str, language: str, subtitle_file: str):
 
         prev = sub
 
-    with open(subtitle_file, "w") as fp:
+    with open(subtitle_file, "w", encoding="utf-8") as fp:
         fp.write(compose(subs))
-
