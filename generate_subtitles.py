@@ -1,6 +1,8 @@
 """Generate the subtitles file a video file"""
 
 import argparse
+from utils.video_to_images import video_to_images
+from utils.subtitle_ocr import generate_subtitle
 
 parser = argparse.ArgumentParser(
     prog="generate_subtitles", description="Generate subtitles from a video file"
@@ -22,3 +24,7 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+frames_dir = 'teahouse_frames'
+video_to_images(args.input_video, y1_percent=int(args.subtitle_area), image_directory=frames_dir)
+generate_subtitle(frames_dir, args.input_language, args.output_subtitles)
