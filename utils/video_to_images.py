@@ -1,16 +1,24 @@
-import cv2
-import os
 from datetime import timedelta
+import os
+import cv2
 
 
-def video_to_images(video_file: str, image_directory: str = None, frame_rate: int = 10,
-                    x1_percent: int = 0, x2_percent: int = 100,
-                    y1_percent: int = 80, y2_percent: int = 100) -> None:
+def video_to_images(
+    video_file: str,
+    image_directory: str = None,
+    frame_rate: int = 10,
+    x1_percent: int = 0,
+    x2_percent: int = 100,
+    y1_percent: int = 80,
+    y2_percent: int = 100,
+) -> None:
 
     cap = cv2.VideoCapture(video_file)
     fps = cap.get(cv2.CAP_PROP_FPS)
     capture_rate = max(round(fps / frame_rate), 1)
-    print(f"Capture the image every {capture_rate} frames to have {frame_rate} images per second.")
+    print(
+        f"Capture the image every {capture_rate} frames to have {frame_rate} images per second."
+    )
 
     frame_count = 0
     image_count = 0
@@ -46,7 +54,9 @@ def video_to_images(video_file: str, image_directory: str = None, frame_rate: in
 
                 cv2.imwrite(output_file, frame)
                 image_count += 1
-                print(f"Frame {frame_count} has been extracted and saved as {output_file}")
+                print(
+                    f"Frame {frame_count} has been extracted and saved as {output_file}"
+                )
                 print(f"for frame : {frame_count}, timestamp is: {timestamp}")
         else:
             break
