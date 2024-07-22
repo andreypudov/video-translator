@@ -12,7 +12,7 @@ python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt
 
  - the file name of the video to be processed
  - the file name of the output subtitles
- - the language of the subtitles in the video ('ch', 'en', 'korean', 'japan', 'chinese_cht', 'ta', 'te', 'ka', 'latin', 'arabic', 'cyrillic', or 'devanagari')
+ - the language of the subtitles in the video (ISO 639-1 language code)
  - the area of the subtitles on the frame (in percentage from the top left corner)
 
 #+BEGIN_SRC shell
@@ -25,7 +25,7 @@ python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 -
 python translate_subtitles.py --input-subtitle input.srt --output-subtitle translated.srt --input-language zh-CN --output-language ru-RU
 #+END_SRC
 
- - the file name of the original subtitl file
+ - the file name of the original subtitle file
  - the file name of the output subtitle file
  - the language of the original subtitle file (ISO 639-1 language code)
  - the language of the output subtitle file (ISO 639-1 language code)

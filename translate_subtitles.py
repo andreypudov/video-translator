@@ -9,7 +9,7 @@ import openai
 import srt
 
 
-def parse_arguments() -> None:
+def parse_arguments() -> argparse.Namespace:
     """
     Parses command-line arguments for the translation script.
 
@@ -48,7 +48,7 @@ def parse_arguments() -> None:
     return parser.parse_args()
 
 
-def check_arguments():
+def check_arguments(args: argparse.Namespace) -> None:
     """
     Check the validity of input and output subtitle files.
 
@@ -65,7 +65,7 @@ def check_arguments():
         sys.exit(1)
 
 
-def translate(
+def translate_string(
     client: openai.OpenAI, text: str, input_language: str, output_language: str
 ) -> str:
     """
@@ -125,7 +125,7 @@ def translate_subtitle(
         input_subtitles = srt.parse(content)
 
         for sub in input_subtitles:
-            translation = translate(
+            translation = translate_string(
                 client, sub.content, input_language, output_language
             )
 
