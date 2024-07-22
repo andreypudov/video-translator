@@ -8,6 +8,8 @@ import os
 import openai
 import srt
 
+from utils.models import TRANSLATION_MODEL
+
 
 def parse_arguments() -> argparse.Namespace:
     """
@@ -86,7 +88,7 @@ def translate_string(
     )
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model=TRANSLATION_MODEL.get("name"),
         messages=[
             {
                 "role": "system",
@@ -154,7 +156,7 @@ def compose_subtitle(subtitles: list, output_subtitle: str) -> None:
 
 client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 args = parse_arguments()
-check_arguments()
+check_arguments(args)
 
 subtitles = translate_subtitle(
     args.input_subtitle, args.input_language, args.output_language
