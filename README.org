@@ -16,7 +16,7 @@ python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt
  - the area of the subtitles on the frame (in percentage from the top left corner)
 
 #+BEGIN_SRC shell
-python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 --output-subtitle samples/russia_subtitle.srt --input-language cyrillic --subtitle-area 80
+python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 --output-subtitle samples/russia_subtitle.srt --input-language ru --subtitle-area 80
 #+END_SRC
 
 * Translate subtitles
@@ -34,7 +34,7 @@ python translate_subtitles.py --input-subtitle input.srt --output-subtitle trans
 
 #+BEGIN_SRC shell
 export OPENAI_API_KEY=<value>
-python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en-US --output-language ru_RU
+python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en --output-language ru
 #+END_SRC
 
 * Using with the virtual environment

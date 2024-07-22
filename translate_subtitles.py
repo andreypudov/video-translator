@@ -1,7 +1,6 @@
 """Translate subtitles"""
 
 import argparse
-import collections.abc
 import json
 import sys
 import os
@@ -109,33 +108,38 @@ def translate_string(
 
 def translate_subtitle(
     input_subtitle: str, input_language: str, output_language: str
-) -> collections.abc.Generator[srt.Subtitle]:
+) -> list[srt.Subtitle]:
     """
-    Translates the content of a subtitle file from the input language to the output language.
+    Translates the content of a subtitle file from one language to another.
 
     Args:
         input_subtitle (str): The path to the input subtitle file.
-        input_language (str): The language code of the input subtitle.
-        output_language (str): The language code of the desired output translation.
+        input_language (str): The language of the input subtitle file.
+        output_language (str): The language to translate the subtitle content to.
 
-    Yields:
-        Subtitle: A generator that yields each translated subtitle.
-
+    Returns:
+        list[srt.Subtitle]: A list of translated subtitle objects.
     """
+
+    subtitles: list[srt.Subtitle] = []
+
     with open(input_subtitle, "r", encoding="utf-8") as file:
         content = file.read()
         input_subtitles = srt.parse(content)
 
         for sub in input_subtitles:
+            original = sub.content.strip().replace("\n", " ").replace("\r", "")
             translation = translate_string(
-                client, sub.content, input_language, output_language
+                client, original, input_language, output_language
             )
 
-            print(f"Subtitle: {sub.content}")
+            print(f"Subtitle: {original}")
             print(f"Translation: {translation}\n")
             sub.content = translation
 
-            yield sub
+            subtitles.append(sub)
+
+        return subtitles
 
 
 def compose_subtitle(subtitles: list, output_subtitle: str) -> None:
