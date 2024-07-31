@@ -8,7 +8,7 @@ from utils.media.video_converter import convert_to_images
 from utils.media.subtitle_ocr import generate_subtitle
 
 
-def parse_arguments() -> argparse.Namespace:
+def __parse_arguments() -> argparse.Namespace:
     """
     Parse command-line arguments for generating subtitles script.
 
@@ -41,7 +41,7 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def check_arguments(args: argparse.Namespace, language: str) -> None:
+def __check_arguments(args: argparse.Namespace, language: str) -> None:
     """
     Check the validity of the input arguments.
 
@@ -51,30 +51,27 @@ def check_arguments(args: argparse.Namespace, language: str) -> None:
     If any of the checks fail, an appropriate error message is printed and the program exits.
     """
     if not os.path.isfile(args.input_video):
-        print(f"File {args.input_video} does not exist")
-        sys.exit(1)
+        sys.exit(f"File {args.input_video} does not exist")
 
     if os.path.isfile(args.output_subtitle):
-        print(f"File {args.output_subtitle} already exists")
-        sys.exit(1)
+        sys.exit(f"File {args.output_subtitle} already exists")
 
     if language == "Unknown":
-        print(f"Language {args.input_language} is not supported")
-        sys.exit(1)
+        sys.exit(f"Language {args.input_language} is not supported")
 
     if (
         not args.subtitle_area.isnumeric()
         or int(args.subtitle_area) < 0
         or int(args.subtitle_area) > 100
     ):
-        print("Subtitle area should be between 0 and 100")
-        sys.exit(1)
+        sys.exit("Subtitle area should be between 0 and 100")
 
 
 FRAMES_DIR = "frames"
-args = parse_arguments()
+
+args = __parse_arguments()
 language = get_writing_system(args.input_language)
-check_arguments(args, language)
+__check_arguments(args, language)
 
 convert_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
 generate_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)

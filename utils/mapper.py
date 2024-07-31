@@ -1,3 +1,5 @@
+""" This module contains mappings between language codes and writing systems. """
+
 # Supported writing systems: 'ch', 'en', 'korean', 'japan', 'chinese_cht', 'ta', 'te', 'ka', 'latin',
 # 'arabic', 'cyrillic', or 'devanagari'
 language_to_writing_system = {

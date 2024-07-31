@@ -35,6 +35,10 @@ python translate_subtitles.py --input-subtitle input.srt --output-subtitle outpu
 #+BEGIN_SRC shell
 export OPENAI_API_KEY=<value>
 python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en --output-language ru
+#+END_SRC
+
+#+BEGIN_SRC shell
+export OPENAI_API_KEY=<value>
 python translate_subtitles.py --input-subtitle samples/andrey_rublev_russian_subtitle.srt --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt --input-language ru --output-language en
 #+END_SRC
 

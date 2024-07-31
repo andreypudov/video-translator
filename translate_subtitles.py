@@ -1,4 +1,4 @@
-"""Translate subtitles"""
+""" Translate subtitles from one language to another. """
 
 import argparse
 import sys
@@ -56,12 +56,10 @@ def __check_arguments(args: argparse.Namespace) -> None:
     If the output subtitle file already exists, it prints an error message and exits the program.
     """
     if not os.path.isfile(args.input_subtitle):
-        print(f"File {args.input_subtitle} does not exist")
-        sys.exit(1)
+        sys.exit(f"File {args.input_subtitle} does not exist")
 
     if os.path.isfile(args.output_subtitle):
-        print(f"File {args.output_subtitle} already exists")
-        sys.exit(1)
+        sys.exit(f"File {args.output_subtitle} already exists")
 
 
 args = __parse_arguments()

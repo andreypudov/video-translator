@@ -8,8 +8,9 @@ import tiktoken
 from utils.models import TRANSLATION_MODEL
 from utils.translation.encoder import decode_string, encode_chunk
 from utils.translation.translator import translate_string
+from utils.translation.validator import translation_is_valid
 
-TOKEN_LIMIT = TRANSLATION_MODEL.get("tokens") * 15 / 100
+TOKEN_LIMIT = TRANSLATION_MODEL.get("tokens") * 64 / 100
 ENCODING = tiktoken.encoding_for_model(TRANSLATION_MODEL.get("name"))
 
 
@@ -57,7 +58,7 @@ def create_translation_chunks(
     total_tokens = 0
 
     for sub in subtitle:
-        content = sub.content
+        content = f"| {sub.content} | {sub.content} |"
         tokens = __num_tokens_from_string(content)
 
         if __max_token_limit_exceeded(total_tokens + tokens):
@@ -92,22 +93,19 @@ def __translate_chunk(
     """
     # store the subtitles in a string
     subtitle_list = list(encode_chunk(chunk))
-    original = "".join([sub.content for sub in subtitle_list])
+    original = "| Original | Translated |\n| --- | --- |\n" + "\n".join(
+        [sub.content for sub in subtitle_list]
+    )
 
     translation = translate_string(original, input_language, output_language)
+    if not translation_is_valid(translation, len(subtitle_list)):
+        if len(subtitle_list) <= 1:
+            sys.exit("Error: The translation is invalid.")
+
+        __translate_chunk(chunk[: len(chunk) // 2], input_language, output_language)
+        __translate_chunk(chunk[len(chunk) // 2 :], input_language, output_language)
+
     translation_list = list(decode_string(translation))
-
-    if len(subtitle_list) != len(translation_list):
-        for _, (original, translation) in enumerate(
-            zip(subtitle_list, translation_list)
-        ):
-            print(f"{original.content} -> {translation}")
-
-        sys.exit(
-            "Error: The number of lines in the translation does not match the original. "
-            f"Original: {len(subtitle_list)}, "
-            f"Translation: {len(translation_list)}"
-        )
 
     for _, (original, translation) in enumerate(zip(subtitle_list, translation_list)):
         original.content = translation
@@ -134,6 +132,28 @@ def translate_chunks(
     """
     for chunk in chunks:
         yield __translate_chunk(chunk, input_language, output_language)
+
+
+def skip_chunks(
+    chunks: collections.abc.Generator[collections.abc.Generator[srt.Subtitle]],
+    number: int,
+) -> collections.abc.Generator[collections.abc.Generator[srt.Subtitle]]:
+    """
+    Skips a given number of chunks.
+
+    Args:
+        chunks (collections.abc.Generator[collections.abc.Generator[srt.Subtitle]]):
+                               A generator of generators containing subtitle chunks.
+        number (int): The number of chunks to skip.
+
+    Yields:
+        collections.abc.Generator[collections.abc.Generator[srt.Subtitle]]:
+                               A generator of generators containing subtitle chunks.
+    """
+    for _ in range(number):
+        next(chunks)
+
+    return chunks
 
 
 def print_chunks(
