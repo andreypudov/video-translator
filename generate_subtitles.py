@@ -4,8 +4,8 @@ import argparse
 import sys
 import os
 from utils.mapper import get_writing_system
-from utils.video_to_images import video_to_images
-from utils.subtitle_ocr import generate_subtitle
+from utils.media.video_converter import convert_to_images
+from utils.media.subtitle_ocr import generate_subtitle
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -76,5 +76,5 @@ args = parse_arguments()
 language = get_writing_system(args.input_language)
 check_arguments(args, language)
 
-video_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
+convert_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
 generate_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)

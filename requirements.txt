@@ -1,11 +1,12 @@
 black==24.4.2
 flake8==7.1.0
-openai==1.36.0
+openai==1.37.1
+opencv-python==4.10.0.84
+paddleocr==2.8.1
+paddlepaddle==2.6.1
 pre-commit==3.7.1
 setuptools==69.5.1
 srt==3.5.3
-wheel==0.43.0
-paddleocr==2.8.1
-paddlepaddle==2.6.1
-opencv-python==4.10.0.84
 srt==3.5.3
+tiktoken==0.7.0
+wheel==0.43.0

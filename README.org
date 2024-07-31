@@ -7,7 +7,7 @@
 * Generate the subtitles file a video file
 
 #+BEGIN_SRC shell
-python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt --input-language zh-CN --subtitle-area 90
+python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt --input-language zh --subtitle-area 90
 #+END_SRC
 
  - the file name of the video to be processed
@@ -22,7 +22,7 @@ python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 -
 * Translate subtitles
 
 #+BEGIN_SRC shell
-python translate_subtitles.py --input-subtitle input.srt --output-subtitle translated.srt --input-language zh-CN --output-language ru-RU
+python translate_subtitles.py --input-subtitle input.srt --output-subtitle output.srt --input-language en --output-language ru
 #+END_SRC
 
  - the file name of the original subtitle file
@@ -35,6 +35,7 @@ python translate_subtitles.py --input-subtitle input.srt --output-subtitle trans
 #+BEGIN_SRC shell
 export OPENAI_API_KEY=<value>
 python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en --output-language ru
+python translate_subtitles.py --input-subtitle samples/andrey_rublev_russian_subtitle.srt --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt --input-language ru --output-language en
 #+END_SRC
 
 * Using with the virtual environment

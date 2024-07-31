@@ -1,16 +1,14 @@
 """Translate subtitles"""
 
 import argparse
-import json
 import sys
 import os
-import openai
-import srt
 
-from utils.models import TRANSLATION_MODEL
+from utils.subtitle import read_subtitle, write_subtitle
+from utils.translation.chunks import create_translation_chunks, translate_chunks
 
 
-def parse_arguments() -> argparse.Namespace:
+def __parse_arguments() -> argparse.Namespace:
     """
     Parses command-line arguments for the translation script.
 
@@ -49,7 +47,7 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def check_arguments(args: argparse.Namespace) -> None:
+def __check_arguments(args: argparse.Namespace) -> None:
     """
     Check the validity of input and output subtitle files.
 
@@ -66,103 +64,14 @@ def check_arguments(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
-def translate_string(
-    client: openai.OpenAI, text: str, input_language: str, output_language: str
-) -> str:
-    """
-    Translates the given text from the input language to the output language using the OpenAI GPT-4 model.
+args = __parse_arguments()
+__check_arguments(args)
 
-    Args:
-        client (object): The instance of the OpenAI client.
-        text (str): The text to be translated.
-        input_language (str): The language of the input text.
-        output_language (str): The language to translate the text into.
-
-    Returns:
-        str: The translated text.
-    """
-    prompt = (
-        f"You will be provided with a sentence in {input_language}, "
-        f"and your task is to translate it into {output_language}."
-    )
-
-    response = client.chat.completions.create(
-        model=TRANSLATION_MODEL.get("name"),
-        messages=[
-            {
-                "role": "system",
-                "content": prompt,
-            },
-            {"role": "user", "content": text},
-        ],
-        temperature=0.7,
-        max_tokens=64,
-        top_p=1,
-    )
-
-    response_json = json.loads(response.model_dump_json(indent=2))
-    content = response_json["choices"][0]["message"]["content"]
-
-    return content
-
-
-def translate_subtitle(
-    input_subtitle: str, input_language: str, output_language: str
-) -> list[srt.Subtitle]:
-    """
-    Translates the content of a subtitle file from one language to another.
-
-    Args:
-        input_subtitle (str): The path to the input subtitle file.
-        input_language (str): The language of the input subtitle file.
-        output_language (str): The language to translate the subtitle content to.
-
-    Returns:
-        list[srt.Subtitle]: A list of translated subtitle objects.
-    """
-
-    subtitles: list[srt.Subtitle] = []
-
-    with open(input_subtitle, "r", encoding="utf-8") as file:
-        content = file.read()
-        input_subtitles = srt.parse(content)
-
-        for sub in input_subtitles:
-            original = sub.content.strip().replace("\n", " ").replace("\r", "")
-            translation = translate_string(
-                client, original, input_language, output_language
-            )
-
-            print(f"Subtitle: {original}")
-            print(f"Translation: {translation}\n")
-            sub.content = translation
-
-            subtitles.append(sub)
-
-        return subtitles
-
-
-def compose_subtitle(subtitles: list, output_subtitle: str) -> None:
-    """
-    Composes a subtitle file from a list of subtitle objects and writes it to the specified output file.
-
-    Args:
-        subtitles (list): A list of subtitle objects.
-        output_subtitle (str): The path to the output subtitle file.
-
-    Returns:
-        None
-    """
-    with open(output_subtitle, "w", encoding="utf-8") as file:
-        content = srt.compose(subtitles)
-        file.write(content)
-
-
-client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-args = parse_arguments()
-check_arguments(args)
-
-subtitles = translate_subtitle(
-    args.input_subtitle, args.input_language, args.output_language
-)
-compose_subtitle(subtitles, args.output_subtitle)
+generator = args.input_subtitle
+for function in (
+    read_subtitle,
+    create_translation_chunks,
+    lambda chunk: translate_chunks(chunk, args.input_language, args.output_language),
+    lambda chunk: write_subtitle(chunk, args.output_subtitle),
+):
+    generator = function(generator)

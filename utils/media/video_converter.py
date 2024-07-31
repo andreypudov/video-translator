@@ -1,9 +1,11 @@
+""" This module contains a function to convert a video file into a sequence of images. """
+
 from datetime import timedelta
 import os
 import cv2
 
 
-def video_to_images(
+def convert_to_images(
     video_file: str,
     image_directory: str = None,
     frame_rate: int = 10,
@@ -12,7 +14,23 @@ def video_to_images(
     y1_percent: int = 80,
     y2_percent: int = 100,
 ) -> None:
+    """
+    Convert a video file into a sequence of images.
 
+    Args:
+        video_file (str): The path to the video file.
+        image_directory (str, optional): The directory to save the extracted images.
+                                         If not provided, a directory with the name of the video file will be created.
+                                         Defaults to None.
+        frame_rate (int, optional): The desired frame rate for the extracted images. Defaults to 10.
+        x1_percent (int, optional): The percentage of the width to start cropping from (left side). Defaults to 0.
+        x2_percent (int, optional): The percentage of the width to end cropping at (right side). Defaults to 100.
+        y1_percent (int, optional): The percentage of the height to start cropping from (top side). Defaults to 80.
+        y2_percent (int, optional): The percentage of the height to end cropping at (bottom side). Defaults to 100.
+
+    Returns:
+        None
+    """
     cap = cv2.VideoCapture(video_file)
     fps = cap.get(cv2.CAP_PROP_FPS)
     capture_rate = max(round(fps / frame_rate), 1)
