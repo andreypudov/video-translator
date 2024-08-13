@@ -1,18 +1,19 @@
-#+TITLE: Video Translator
-#+DESCRIPTION: The collection of utils to translate the videos
-#+DATE: <2024-07-20 Sat>
-#+AUTHOR: Andrey Pudov
-#+AUTHOR: Pei Pei Chen
+#+title: Video Translator
+#+description: The collection of utils to translate the videos
+#+date: <2024-07-20 sat>
+#+author: Andrey Pudov
+#+author: Pei Pei Chen
+#+language: en
 
 * Generate the subtitles for a video file (hardcoded subtitles)
 
-#+BEGIN_SRC shell
+#+begin_src shell
 python generate_subtitles.py \
   --input-video input.mp4 \
   --output-subtitle input.srt \
   --input-language zh \
   --subtitle-area 90
-#+END_SRC
+#+end_src
 
  - the file name of the video to be processed
  - the file name of the output subtitles
@@ -21,13 +22,13 @@ python generate_subtitles.py \
 
 * Translate subtitles
 
-#+BEGIN_SRC shell
+#+begin_src shell
 python translate_subtitles.py \
   --input-subtitle input.srt \
   --output-subtitle output.srt \
   --input-language en \
   --output-language ru
-#+END_SRC
+#+end_src
 
  - the file name of the original subtitle file
  - the file name of the output subtitle file
@@ -38,39 +39,39 @@ python translate_subtitles.py \
 
 Translating English subtitles to Russian and vice versa:
 
-#+BEGIN_SRC shell
+#+begin_src shell
 export OPENAI_API_KEY=<value>
 python translate_subtitles.py \
   --input-subtitle samples/english_subtitles.srt \
   --output-subtitle samples/russian_subtitle.srt \
   --input-language en \
   --output-language ru
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC shell
+#+begin_src shell
 export OPENAI_API_KEY=<value>
 python translate_subtitles.py \
   --input-subtitle samples/andrey_rublev_russian_subtitle.srt \
   --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt \
   --input-language ru \
   --output-language en
-#+END_SRC
+#+end_src
 
 Generating a subtitle file for the Winnie the Pooh animation with the Russian subtitles on the video:
 
-#+BEGIN_SRC shell
+#+begin_src shell
 python generate_subtitles.py \
   --input-video samples/winnie-the-pooh-russian.mp4 \
   --output-subtitle samples/russia_subtitle.srt \
   --input-language ru \
   --subtitle-area 80
-#+END_SRC
+#+end_src
 
 * Using with the virtual environment
 
-#+BEGIN_SRC shell
+#+begin_src shell
 python -m venv ven
 source venv/bin/activate
 pip install -r requirements.txt
 pre-commit install
-#+END_SRC
+#+end_src
