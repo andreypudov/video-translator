@@ -4,7 +4,7 @@
 #+AUTHOR: Andrey Pudov
 #+AUTHOR: Pei Pei Chen
 
-* Generate the subtitles file for a video file (hardcoded subtitles)
+* Generate the subtitles for a video file (hardcoded subtitles)
 
 #+BEGIN_SRC shell
 python generate_subtitles.py \
