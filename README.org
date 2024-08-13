@@ -4,10 +4,13 @@
 #+AUTHOR: Andrey Pudov
 #+AUTHOR: Pei Pei Chen
 
-* Generate the subtitles file a video file
+* Generate the subtitles file a video file (video with hardcoded subtitles)
 
 #+BEGIN_SRC shell
-python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt --input-language zh --subtitle-area 90
+python generate_subtitles.py --input-video input.mp4 \
+                             --output-subtitle input.srt \
+                             --input-language zh \
+                             --subtitle-area 90
 #+END_SRC
 
  - the file name of the video to be processed
@@ -15,14 +18,13 @@ python generate_subtitles.py --input-video input.mp4 --output-subtitle input.srt
  - the language of the subtitles in the video (ISO 639-1 language code)
  - the area of the subtitles on the frame (in percentage from the top left corner)
 
-#+BEGIN_SRC shell
-python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 --output-subtitle samples/russia_subtitle.srt --input-language ru --subtitle-area 80
-#+END_SRC
-
 * Translate subtitles
 
 #+BEGIN_SRC shell
-python translate_subtitles.py --input-subtitle input.srt --output-subtitle output.srt --input-language en --output-language ru
+python translate_subtitles.py --input-subtitle input.srt \
+                              --output-subtitle output.srt \
+                              --input-language en \
+                              --output-language ru
 #+END_SRC
 
  - the file name of the original subtitle file
@@ -30,16 +32,30 @@ python translate_subtitles.py --input-subtitle input.srt --output-subtitle outpu
  - the language of the original subtitle file (ISO 639-1 language code)
  - the language of the output subtitle file (ISO 639-1 language code)
 
-** Example:
+* Examples:
+
+Translating English subtitles to Russian and vice versa:
 
 #+BEGIN_SRC shell
 export OPENAI_API_KEY=<value>
-python translate_subtitles.py --input-subtitle samples/english_subtitles.srt --output-subtitle samples/russian_subtitle.srt --input-language en --output-language ru
+python translate_subtitles.py --input-subtitle samples/english_subtitles.srt \
+                              --output-subtitle samples/russian_subtitle.srt \
+                              --input-language en \
+                              --output-language ru
 #+END_SRC
 
 #+BEGIN_SRC shell
 export OPENAI_API_KEY=<value>
-python translate_subtitles.py --input-subtitle samples/andrey_rublev_russian_subtitle.srt --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt --input-language ru --output-language en
+python translate_subtitles.py --input-subtitle samples/andrey_rublev_russian_subtitle.srt \
+                              --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt \
+                              --input-language ru \
+                              --output-language en
+#+END_SRC
+
+Generating a subtitle file for the Winnie the Pooh animation with the Russian subtitles on the video:
+
+#+BEGIN_SRC shell
+python generate_subtitles.py --input-video samples/winnie-the-pooh-russian.mp4 --output-subtitle samples/russia_subtitle.srt --input-language ru --subtitle-area 80
 #+END_SRC
 
 * Using with the virtual environment
