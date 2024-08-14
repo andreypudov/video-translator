@@ -5,21 +5,24 @@
 #+author: Pei Pei Chen
 #+language: en
 
+# Perform an editable installation
+
 #+begin_src shell
 pip install --editable .
+
+generate_subtitles --help
+translate_subtitles --help
 #+end_src
 
 # Generating distribution archives
 
 #+begin_src shell
-python -m pip install --upgrade build
 python3 -m build
 #+end_src
 
 # Uploading the distribution archives to the test index
 
 #+begin_src shell
-python3 -m pip install --upgrade twine
 python3 -m twine upload --repository testpypi dist/*
 #+end_src
 
@@ -37,6 +40,5 @@ translate_subtitles --help
 # Uploading the distribution archives to the prod index
 
 #+begin_src shell
-python3 -m pip install --upgrade twine
 python3 -m twine upload dist/*
 #+end_src
