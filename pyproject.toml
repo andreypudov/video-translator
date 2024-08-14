@@ -19,21 +19,15 @@ classifiers = [
 dynamic = ["dependencies", "optional-dependencies"]
 
 [project.scripts]
-"generate_subtitles" = "scripts:generate_subtitles"
-"translate_subtitles" = "scripts:translate_subtitles"
+"generate_subtitles" = "generate_subtitles.generate_subtitles:main"
+"translate_subtitles" = "translate_subtitles.translate_subtitles:main"
 
 [project.urls]
 Homepage = "https://github.com/andreypudov/video-translator"
 Issues = "https://github.com/andreypudov/video-translator/issues"
 
 [tool.setuptools]
-packages = [
-  "generate_subtitles",
-  "generate_subtitles.utils",
-  "translate_subtitles",
-  "translate_subtitles.utils",
-  "scripts"
-]
+packages = ["generate_subtitles", "translate_subtitles"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
