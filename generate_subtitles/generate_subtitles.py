@@ -3,9 +3,9 @@
 import argparse
 import sys
 import os
-from utils.mapper import get_writing_system
-from utils.media.video_converter import convert_to_images
-from utils.media.subtitle_ocr import generate_subtitle
+from generate_subtitles.utils.mapper import get_writing_system
+from generate_subtitles.utils.video_converter import convert_to_images
+from generate_subtitles.utils.subtitle_ocr import generate_subtitle
 
 
 def __parse_arguments() -> argparse.Namespace:
@@ -69,9 +69,25 @@ def __check_arguments(args: argparse.Namespace, language: str) -> None:
 
 FRAMES_DIR = "frames"
 
-args = __parse_arguments()
-language = get_writing_system(args.input_language)
-__check_arguments(args, language)
 
-convert_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
-generate_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)
+def main():
+    """
+    Main function for generating subtitles from a video.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
+
+    args = __parse_arguments()
+    language = get_writing_system(args.input_language)
+    __check_arguments(args, language)
+
+    convert_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
+    generate_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)
+
+
+if __name__ == "__main__":
+    main()

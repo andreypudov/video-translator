@@ -1,12 +1,12 @@
-black==24.4.2
+black==24.8.0
 flake8-bugbear==24.4.26
-flake8==7.1.0
-openai==1.37.1
+flake8==7.1.1
+openai==1.40.6
 opencv-python==4.10.0.84
 paddleocr==2.8.1
 paddlepaddle==2.6.1
 pre-commit==3.7.1
-setuptools==70.0.0
+setuptools==72.2.0
 srt==3.5.3
 tiktoken==0.7.0
-wheel==0.43.0
+wheel==0.44.0

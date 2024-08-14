@@ -1,0 +1,35 @@
+#+title: Build the package
+#+description: The collection of utils to translate the videos
+#+date: <2024-07-20 sat>
+#+author: Andrey Pudov
+#+author: Pei Pei Chen
+#+language: en
+
+#+begin_src shell
+pip install --editable .
+#+end_src
+
+# Generating distribution archives
+
+#+begin_src shell
+python -m pip install --upgrade build
+python3 -m build
+#+end_src
+
+# Uploading the distribution archives
+
+#+begin_src shell
+python3 -m pip install --upgrade twine
+python3 -m twine upload --repository testpypi dist/*
+#+end_src
+
+# Test the package
+
+#+begin_src shell
+python -m venv venv_test
+source venv_test/bin/activate
+pip install -i https://test.pypi.org/simple/ video-translator
+
+generate_subtitles --help
+translate_subtitles --help
+#+end_src

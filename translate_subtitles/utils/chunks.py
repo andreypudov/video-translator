@@ -5,10 +5,10 @@ import collections.abc
 import srt
 import tiktoken
 
-from utils.models import TRANSLATION_MODEL
-from utils.translation.encoder import decode_string, encode_chunk
-from utils.translation.translator import translate_string
-from utils.translation.validator import translation_is_valid
+from translate_subtitles.utils.models import TRANSLATION_MODEL
+from translate_subtitles.utils.encoder import decode_string, encode_chunk
+from translate_subtitles.utils.translator import translate_string
+from translate_subtitles.utils.validator import translation_is_valid
 
 TOKEN_LIMIT = TRANSLATION_MODEL.get("tokens") * 64 / 100
 ENCODING = tiktoken.encoding_for_model(TRANSLATION_MODEL.get("name"))

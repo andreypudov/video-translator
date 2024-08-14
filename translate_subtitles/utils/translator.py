@@ -4,7 +4,7 @@ import os
 import json
 import openai
 
-from utils.models import TRANSLATION_MODEL
+from translate_subtitles.utils.models import TRANSLATION_MODEL
 
 
 OPENAI_CLIENT = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))

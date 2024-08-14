@@ -8,7 +8,7 @@
 * Generate the subtitles for a video file (hardcoded subtitles)
 
 #+begin_src shell
-python generate_subtitles.py \
+generate_subtitles \
   --input-video input.mp4 \
   --output-subtitle input.srt \
   --input-language zh \
@@ -23,7 +23,7 @@ python generate_subtitles.py \
 * Translate subtitles
 
 #+begin_src shell
-python translate_subtitles.py \
+translate_subtitles \
   --input-subtitle input.srt \
   --output-subtitle output.srt \
   --input-language en \
@@ -41,7 +41,7 @@ Translating English subtitles to Russian and vice versa:
 
 #+begin_src shell
 export OPENAI_API_KEY=<value>
-python translate_subtitles.py \
+translate_subtitles \
   --input-subtitle samples/english_subtitles.srt \
   --output-subtitle samples/russian_subtitle.srt \
   --input-language en \
@@ -50,7 +50,7 @@ python translate_subtitles.py \
 
 #+begin_src shell
 export OPENAI_API_KEY=<value>
-python translate_subtitles.py \
+translate_subtitles \
   --input-subtitle samples/andrey_rublev_russian_subtitle.srt \
   --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt \
   --input-language ru \
@@ -60,18 +60,9 @@ python translate_subtitles.py \
 Generating a subtitle file for the Winnie the Pooh animation with the Russian subtitles on the video:
 
 #+begin_src shell
-python generate_subtitles.py \
+generate_subtitles \
   --input-video samples/winnie-the-pooh-russian.mp4 \
   --output-subtitle samples/russia_subtitle.srt \
   --input-language ru \
   --subtitle-area 80
-#+end_src
-
-* Using with the virtual environment
-
-#+begin_src shell
-python -m venv ven
-source venv/bin/activate
-pip install -r requirements.txt
-pre-commit install
 #+end_src

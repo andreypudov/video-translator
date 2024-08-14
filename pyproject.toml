@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-translator"
+version = "0.0.1"
+authors = [
+  { name="Andrey Pudov", email="mail@andreypudov.com" }
+]
+description = "The collection of utils to translate the videos"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = [
+  "openai==1.40.6",
+  "opencv-python==4.10.0.84",
+  "paddleocr==2.8.1",
+  "paddlepaddle==2.6.1",
+  "srt==3.5.3",
+  "tiktoken==0.7.0"
+]
+
+[project.scripts]
+"generate_subtitles" = "scripts:generate_subtitles"
+"translate_subtitles" = "scripts:translate_subtitles"
+
+[project.urls]
+Homepage = "https://github.com/andreypudov/video-translator"
+Issues = "https://github.com/andreypudov/video-translator/issues"
+
+[tool.setuptools]
+packages = [
+  "generate_subtitles",
+  "generate_subtitles.utils",
+  "translate_subtitles",
+  "translate_subtitles.utils",
+  "scripts"
+]

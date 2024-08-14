@@ -4,8 +4,8 @@ import argparse
 import sys
 import os
 
-from utils.subtitle import read_subtitle, write_subtitle
-from utils.translation.chunks import create_translation_chunks, translate_chunks
+from translate_subtitles.utils.subtitle import read_subtitle, write_subtitle
+from translate_subtitles.utils.chunks import create_translation_chunks, translate_chunks
 
 
 def __parse_arguments() -> argparse.Namespace:
@@ -62,14 +62,33 @@ def __check_arguments(args: argparse.Namespace) -> None:
         sys.exit(f"File {args.output_subtitle} already exists")
 
 
-args = __parse_arguments()
-__check_arguments(args)
+def main():
+    """
+    Main function for translating subtitles.
 
-generator = args.input_subtitle
-for function in (
-    read_subtitle,
-    create_translation_chunks,
-    lambda chunk: translate_chunks(chunk, args.input_language, args.output_language),
-    lambda chunk: write_subtitle(chunk, args.output_subtitle),
-):
-    generator = function(generator)
+    This function parses command line arguments, checks the arguments, and performs the translation process.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
+
+    args = __parse_arguments()
+    __check_arguments(args)
+
+    generator = args.input_subtitle
+    for function in (
+        read_subtitle,
+        create_translation_chunks,
+        lambda chunk: translate_chunks(
+            chunk, args.input_language, args.output_language
+        ),
+        lambda chunk: write_subtitle(chunk, args.output_subtitle),
+    ):
+        generator = function(generator)
+
+
+if __name__ == "__main__":
+    main()
