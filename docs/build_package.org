@@ -16,7 +16,7 @@ python -m pip install --upgrade build
 python3 -m build
 #+end_src
 
-# Uploading the distribution archives
+# Uploading the distribution archives to the test index
 
 #+begin_src shell
 python3 -m pip install --upgrade twine
@@ -32,4 +32,11 @@ pip install -i https://test.pypi.org/simple/ video-translator
 
 generate_subtitles --help
 translate_subtitles --help
+#+end_src
+
+# Uploading the distribution archives to the prod index
+
+#+begin_src shell
+python3 -m pip install --upgrade twine
+python3 -m twine upload dist/*
 #+end_src
