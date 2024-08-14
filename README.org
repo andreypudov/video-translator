@@ -1,5 +1,5 @@
 #+title: Video Translator
-#+description: The collection of utils to translate the videos
+#+description: The collection of command-line utils to translate videos
 #+date: <2024-07-20 sat>
 #+author: Andrey Pudov
 #+author: Pei Pei Chen
