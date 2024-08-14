@@ -16,14 +16,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Multimedia :: Video",
 ]
-dependencies = [
-  "openai==1.40.6",
-  "opencv-python==4.10.0.84",
-  "paddleocr==2.8.1",
-  "paddlepaddle==2.6.1",
-  "srt==3.5.3",
-  "tiktoken==0.7.0"
-]
+dynamic = ["dependencies", "optional-dependencies"]
 
 [project.scripts]
 "generate_subtitles" = "scripts:generate_subtitles"
@@ -41,3 +34,7 @@ packages = [
   "translate_subtitles.utils",
   "scripts"
 ]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
