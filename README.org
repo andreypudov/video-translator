@@ -5,7 +5,7 @@
 #+author: Pei Pei Chen
 #+language: en
 
-* Generate the subtitles for a video file (hardcoded subtitles)
+* Generate the subtitles for a video file
 
 #+begin_src shell
 generate_subtitles \
@@ -35,7 +35,7 @@ translate_subtitles \
  - the language of the original subtitle file (ISO 639-1 language code)
  - the language of the output subtitle file (ISO 639-1 language code)
 
-* Examples:
+* Examples
 
 Translating English subtitles to Russian and vice versa:
 
