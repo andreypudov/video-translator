@@ -62,7 +62,7 @@ def __check_arguments(args: argparse.Namespace) -> None:
         sys.exit(f"File {args.output_subtitle} already exists")
 
 
-def main():
+def main() -> None:
     """
     Main function for translating subtitles.
 

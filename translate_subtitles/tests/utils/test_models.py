@@ -10,7 +10,7 @@ class TestModels(unittest.TestCase):
     Unit test suite for the models module.
     """
 
-    def test_model_name(self):
+    def test_model_name(self) -> None:
         """
         Test case to verify the correctness of the model name.
         """
@@ -20,7 +20,7 @@ class TestModels(unittest.TestCase):
             "The model name is incorrect.",
         )
 
-    def test_model_tokens(self):
+    def test_model_tokens(self) -> None:
         """
         Test the number of tokens in the translation model.
         """

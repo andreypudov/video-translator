@@ -16,7 +16,7 @@ class TestChunks(unittest.TestCase):
     Unit test suite for the chunks module.
     """
 
-    def setUp(self):
+    def setUp(self) -> None:
         """
         Set up the test case by initializing the necessary variables.
         """
@@ -62,7 +62,7 @@ class TestChunks(unittest.TestCase):
             content=content,
         )
 
-    def test_num_tokens_from_string(self):
+    def test_num_tokens_from_string(self) -> None:
         """
         Test the __num_tokens_from_string function.
         """
@@ -78,7 +78,7 @@ class TestChunks(unittest.TestCase):
         self.assertIs(False, max_token_limit_exceeded(2621))
         self.assertIs(True, max_token_limit_exceeded(2622))
 
-    def test_create_translation_chunks_small(self):
+    def test_create_translation_chunks_small(self) -> None:
         """
         Test the create_translation_chunks function.
         """
@@ -88,7 +88,7 @@ class TestChunks(unittest.TestCase):
         ]
         self.assertEqual(self.small_translated_chunk, actual)
 
-    def test_create_translation_chunks_large(self):
+    def test_create_translation_chunks_large(self) -> None:
         """
         Test the create_translation_chunks function.
         """

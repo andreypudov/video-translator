@@ -12,7 +12,7 @@ class TestEncoder(unittest.TestCase):
     Unit test suite for the encoder module.
     """
 
-    def setUp(self):
+    def setUp(self) -> None:
         """
         Set up the test case by initializing the necessary variables.
         """
@@ -62,7 +62,7 @@ class TestEncoder(unittest.TestCase):
             "Лорем ипсум долор сит амет.",
         ]
 
-    def test_encode_chunk(self):
+    def test_encode_chunk(self) -> None:
         """
         Test the encode_chunk function.
 
@@ -76,7 +76,7 @@ class TestEncoder(unittest.TestCase):
             self.encoded_chunk, actual, "The encoded chunk is incorrect."
         )
 
-    def test_encode_chunks(self):
+    def test_encode_chunks(self) -> None:
         """
         Test the encode_chunks function.
 
@@ -87,7 +87,7 @@ class TestEncoder(unittest.TestCase):
             self.encoded_chunks, actual, "The encoded chunks are incorrect."
         )
 
-    def test_decode_string(self):
+    def test_decode_string(self) -> None:
         """
         Test the decode_string function.
 
