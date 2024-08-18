@@ -49,7 +49,7 @@ def __write_chunk(
 
         subtitle_index += 1
 
-    content = srt.compose(sub_list)
+    content = srt.compose(sub_list, reindex=False)
 
     file.write(content)
     file.flush()
