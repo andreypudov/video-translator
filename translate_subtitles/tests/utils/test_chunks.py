@@ -1,5 +1,7 @@
 """Test the chunks module"""
 
+from unittest.mock import patch
+
 import unittest
 import datetime
 import srt
@@ -8,6 +10,7 @@ from translate_subtitles.utils.chunks import (
     __max_token_limit_exceeded as max_token_limit_exceeded,
     __num_tokens_from_string as num_tokens_from_string,
     create_translation_chunks,
+    translate_chunks,
 )
 
 
@@ -30,19 +33,21 @@ class TestChunks(unittest.TestCase):
         }
 
         # 10 subtitles with 120 * 10 = 1200 tokens each (< 2622 / 2 = 1311 tokens)
-        self.small_chunk_to_translate = [
+        self.small_original_chunk = [
             self.__create_subtitle(self.sample_subtitle, index) for index in range(10)
         ]
-        self.small_translated_chunk = [self.small_chunk_to_translate]
+        self.small_chunk_to_translate = [self.small_original_chunk]
+        self.small_translated_chunk = self.small_chunk_to_translate
 
         # 20 subtitles with 120 * 20 = 2400 tokens each (> 2622 / 2 = 1311 tokens)
-        self.large_chunk_to_translate = [
+        self.large_original_chunk = [
             self.__create_subtitle(self.sample_subtitle, index) for index in range(20)
         ]
-        self.large_translated_chunk = [
-            self.large_chunk_to_translate[:10],
-            self.large_chunk_to_translate[10:],
+        self.large_chunk_to_translate = [
+            self.large_original_chunk[:10],
+            self.large_original_chunk[10:],
         ]
+        self.large_translated_chunk = self.large_chunk_to_translate
 
     def __create_subtitle(self, content: str, index: int) -> srt.Subtitle:
         """
@@ -84,9 +89,9 @@ class TestChunks(unittest.TestCase):
         """
         actual = [
             list(generator)
-            for generator in create_translation_chunks(self.small_chunk_to_translate)
+            for generator in create_translation_chunks(self.small_original_chunk)
         ]
-        self.assertEqual(self.small_translated_chunk, actual)
+        self.assertListEqual(self.small_chunk_to_translate, actual)
 
     def test_create_translation_chunks_large(self) -> None:
         """
@@ -94,6 +99,20 @@ class TestChunks(unittest.TestCase):
         """
         actual = [
             list(generator)
-            for generator in create_translation_chunks(self.large_chunk_to_translate)
+            for generator in create_translation_chunks(self.large_original_chunk)
         ]
-        self.assertEqual(self.large_translated_chunk, actual)
+        self.assertListEqual(self.large_chunk_to_translate, actual)
+
+    @patch(
+        "translate_subtitles.utils.chunks.translate_string",
+        side_effect=lambda text, _, __: text,
+    )
+    def test_translate_chunks_small(self, _) -> None:
+        """
+        Test the translate_chunks function.
+        """
+        actual = [
+            list(generator)
+            for generator in translate_chunks(self.small_chunk_to_translate, "zh", "en")
+        ]
+        self.assertListEqual(self.small_translated_chunk, actual)
