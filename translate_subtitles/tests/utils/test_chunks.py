@@ -6,10 +6,12 @@ import unittest
 import datetime
 import srt
 
+from translate_subtitles.tests.utils.converter import to_list
 from translate_subtitles.utils.chunks import (
     __max_token_limit_exceeded as max_token_limit_exceeded,
     __num_tokens_from_string as num_tokens_from_string,
     create_translation_chunks,
+    skip_chunks,
     translate_chunks,
 )
 
@@ -87,20 +89,14 @@ class TestChunks(unittest.TestCase):
         """
         Test the create_translation_chunks function.
         """
-        actual = [
-            list(generator)
-            for generator in create_translation_chunks(self.small_original_chunk)
-        ]
+        actual = to_list(create_translation_chunks(self.small_original_chunk))
         self.assertListEqual(self.small_chunk_to_translate, actual)
 
     def test_create_translation_chunks_large(self) -> None:
         """
         Test the create_translation_chunks function.
         """
-        actual = [
-            list(generator)
-            for generator in create_translation_chunks(self.large_original_chunk)
-        ]
+        actual = to_list(create_translation_chunks(self.large_original_chunk))
         self.assertListEqual(self.large_chunk_to_translate, actual)
 
     @patch(
@@ -111,8 +107,24 @@ class TestChunks(unittest.TestCase):
         """
         Test the translate_chunks function.
         """
-        actual = [
-            list(generator)
-            for generator in translate_chunks(self.small_chunk_to_translate, "zh", "en")
-        ]
+        actual = to_list(translate_chunks(self.small_chunk_to_translate, "zh", "en"))
         self.assertListEqual(self.small_translated_chunk, actual)
+
+    @patch(
+        "translate_subtitles.utils.chunks.translate_string",
+        side_effect=lambda text, _, __: text,
+    )
+    def test_translate_chunks_large(self, _) -> None:
+        """
+        Test the translate_chunks function.
+        """
+        actual = to_list(translate_chunks(self.large_chunk_to_translate, "zh", "en"))
+        self.assertListEqual(self.large_translated_chunk, actual)
+
+    def test_skip_chunks(self) -> None:
+        """
+        Test the skip_chunks function.
+        """
+        skip = 1
+        actual = to_list(skip_chunks(iter(self.large_chunk_to_translate), skip))
+        self.assertListEqual(self.large_chunk_to_translate[skip:], actual)

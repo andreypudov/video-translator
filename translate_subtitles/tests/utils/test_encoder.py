@@ -4,6 +4,7 @@ import datetime
 import unittest
 import srt
 
+from translate_subtitles.tests.utils.converter import to_list
 from translate_subtitles.utils.encoder import decode_string, encode_chunk, encode_chunks
 
 
@@ -82,7 +83,7 @@ class TestEncoder(unittest.TestCase):
 
         This test verifies that the encode_chunks function correctly encodes the given chunks and returns the expected result.
         """
-        actual = [list(generator) for generator in encode_chunks(self.chunks)]
+        actual = to_list(encode_chunks(self.chunks))
         self.assertListEqual(
             self.encoded_chunks, actual, "The encoded chunks are incorrect."
         )
