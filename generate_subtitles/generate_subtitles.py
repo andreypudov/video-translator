@@ -1,4 +1,4 @@
-"""Generate the subtitles file a video file"""
+""" Generate the subtitles file a video file. """
 
 import argparse
 import sys

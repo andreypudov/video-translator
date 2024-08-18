@@ -1,4 +1,4 @@
-"""Test the models module"""
+""" Test the models module. """
 
 import unittest
 

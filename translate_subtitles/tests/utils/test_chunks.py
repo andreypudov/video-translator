@@ -1,4 +1,4 @@
-"""Test the chunks module"""
+""" Test the chunks module. """
 
 from unittest.mock import patch
 

@@ -1,4 +1,4 @@
-"""This module contains functions to convert generators to lists"""
+""" This module contains functions to convert generators to lists. """
 
 import collections.abc
 

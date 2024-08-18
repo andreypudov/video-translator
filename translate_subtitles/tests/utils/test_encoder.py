@@ -1,4 +1,4 @@
-"""Test the encoder module"""
+""" Test the encoder module. """
 
 import datetime
 import unittest
