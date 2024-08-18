@@ -98,7 +98,3 @@ class TestEncoder(unittest.TestCase):
         self.assertEqual(
             self.decoded_string, actual, "The decoded string is incorrect."
         )
-
-
-if __name__ == "__main__":
-    unittest.main()

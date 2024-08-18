@@ -1,6 +1,6 @@
 """ Test the chunks module. """
 
-from unittest.mock import patch
+from unittest import mock
 
 import unittest
 import datetime
@@ -99,7 +99,7 @@ class TestChunks(unittest.TestCase):
         actual = to_list(create_translation_chunks(self.large_original_chunk))
         self.assertListEqual(self.large_chunk_to_translate, actual)
 
-    @patch(
+    @mock.patch(
         "translate_subtitles.utils.chunks.translate_string",
         side_effect=lambda text, _, __: text,
     )
@@ -110,7 +110,7 @@ class TestChunks(unittest.TestCase):
         actual = to_list(translate_chunks(self.small_chunk_to_translate, "zh", "en"))
         self.assertListEqual(self.small_translated_chunk, actual)
 
-    @patch(
+    @mock.patch(
         "translate_subtitles.utils.chunks.translate_string",
         side_effect=lambda text, _, __: text,
     )
