@@ -51,4 +51,5 @@ def print_progress_chunks(
     for chunk in chunks:
         yield print_progress_chunk(chunk)
 
+    # new line after the progress information
     print("\n", end="")
