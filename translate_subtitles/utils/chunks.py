@@ -154,34 +154,3 @@ def skip_chunks(
         next(chunks)
 
     return chunks
-
-
-def print_chunks(
-    chunks: collections.abc.Generator[collections.abc.Generator[srt.Subtitle]],
-) -> None:
-    """
-    Prints the content of each subtitle in each chunk.
-
-    Args:
-        chunks (collections.abc.Generator[collections.abc.Generator[srt.Subtitle]]):
-                               A generator that yields each chunk of subtitles.
-
-    Returns:
-        None
-    """
-    for chunk in chunks:
-        print_chunk(chunk)
-
-
-def print_chunk(chunk: collections.abc.Generator[srt.Subtitle]) -> None:
-    """
-    Prints the content of each subtitle in a chunk.
-
-    Args:
-        chunk (collections.abc.Generator[srt.Subtitle]): A generator that yields each subtitle in the chunk.
-
-    Returns:
-        None
-    """
-    for sub in chunk:
-        print(sub.content)

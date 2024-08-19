@@ -4,6 +4,7 @@ import argparse
 import sys
 import os
 
+from translate_subtitles.utils.progress import print_progress_chunks
 from translate_subtitles.utils.subtitle import read_subtitle, write_subtitle
 from translate_subtitles.utils.chunks import create_translation_chunks, translate_chunks
 
@@ -85,6 +86,7 @@ def main() -> None:
         lambda chunk: translate_chunks(
             chunk, args.input_language, args.output_language
         ),
+        print_progress_chunks,
         lambda chunk: write_subtitle(chunk, args.output_subtitle),
     ):
         generator = function(generator)

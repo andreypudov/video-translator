@@ -6,7 +6,11 @@ import datetime
 import unittest
 import srt
 
-from translate_subtitles.utils.subtitle import read_subtitle, write_subtitle
+from translate_subtitles.utils.subtitle import (
+    count_subtitles,
+    read_subtitle,
+    write_subtitle,
+)
 
 SUBTITLE_CONTENT = (
     "1\n"
@@ -154,3 +158,11 @@ class TestSubtitle(unittest.TestCase):
                 mock.call().__exit__(None, None, None),
             ]
         )
+
+    @mock.patch("builtins.open", mock.mock_open(read_data=SUBTITLE_CONTENT))
+    def test_count_subtitles(self) -> None:
+        """
+        Test the count_subtitles function.
+        """
+        actual = count_subtitles("subtitle.srt")
+        self.assertEqual(3, actual)
