@@ -44,4 +44,3 @@ def write_subtitle(
             content = srt.compose(list(chunk), reindex=False)
 
             file.write(content)
-            file.flush()

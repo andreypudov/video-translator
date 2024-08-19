@@ -150,9 +150,7 @@ class TestSubtitle(unittest.TestCase):
                 mock.call("output.srt", "w", encoding="utf-8"),
                 mock.call().__enter__(),
                 mock.call().__enter__().write(ANDREY_RUBLEV_CONTENT_1),
-                mock.call().__enter__().flush(),
                 mock.call().__enter__().write(ANDREY_RUBLEV_CONTENT_2),
-                mock.call().__enter__().flush(),
                 mock.call().__exit__(None, None, None),
             ]
         )
