@@ -5,6 +5,12 @@
 #+author: Pei Pei Chen
 #+language: en
 
+* Install the package
+
+#+begin_src shell
+pip install video-translator
+#+end_src
+
 * Generate the subtitles for a video file
 
 #+begin_src shell
@@ -38,15 +44,6 @@ translate_subtitles \
 * Examples
 
 Translating English subtitles to Russian and vice versa:
-
-#+begin_src shell
-export OPENAI_API_KEY=<value>
-translate_subtitles \
-  --input-subtitle samples/english_subtitles.srt \
-  --output-subtitle samples/russian_subtitle.srt \
-  --input-language en \
-  --output-language ru
-#+end_src
 
 #+begin_src shell
 export OPENAI_API_KEY=<value>

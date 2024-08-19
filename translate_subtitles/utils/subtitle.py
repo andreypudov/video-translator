@@ -44,3 +44,20 @@ def write_subtitle(
             content = srt.compose(list(chunk), reindex=False)
 
             file.write(content)
+
+
+def count_subtitles(input_subtitle: str) -> int:
+    """
+    Counts the number of subtitles in the given subtitle file.
+
+    Args:
+        input_subtitle (str): The path to the input subtitle file.
+
+    Returns:
+        int: The number of subtitles in the given subtitle file.
+    """
+    with open(input_subtitle, "r", encoding="utf-8") as file:
+        content = file.read()
+        subtitle = srt.parse(content)
+
+        return len(list(subtitle))
