@@ -7,9 +7,6 @@ import openai
 from translate_subtitles.utils.models import TRANSLATION_MODEL
 
 
-OPENAI_CLIENT = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-
 def translate_string(text: str, input_language: str, output_language: str) -> str:
     """
     Translates the given text from the input language to the output language.
@@ -22,6 +19,8 @@ def translate_string(text: str, input_language: str, output_language: str) -> st
     Returns:
         str: The translated text.
     """
+    openAiClient = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
     prompt = (
         f"You will be provided with a table of sentences in {input_language}, "
         f"and your task is to translate it into {output_language}, "
@@ -37,7 +36,7 @@ def translate_string(text: str, input_language: str, output_language: str) -> st
         "and the translations in the 'Translated' column. Translate row by row."
     )
 
-    response = OPENAI_CLIENT.chat.completions.create(
+    response = openAiClient.chat.completions.create(
         model=TRANSLATION_MODEL.get("name"),
         messages=[
             {
