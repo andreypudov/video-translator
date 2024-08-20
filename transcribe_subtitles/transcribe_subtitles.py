@@ -14,7 +14,7 @@ def __parse_arguments() -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(
         prog="transcribe_subtitles",
-        description="Transcribing subtitles from an audio or video file",
+        description="Transcribe subtitles from an audio or video file",
     )
 
     parser.add_argument(

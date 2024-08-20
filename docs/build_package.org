@@ -25,6 +25,7 @@ source venv_test/bin/activate
 pip install -i https://test.pypi.org/simple/ video-translator
 
 extract_subtitles --help
+transcribe_subtitles --help
 translate_subtitles --help
 #+end_src
 
