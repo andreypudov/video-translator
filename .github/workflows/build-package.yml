@@ -28,15 +28,16 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-    - name: Lint with flake8
+    - name: Lint
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --show-source --statistics
 
         # stop the build if there are formatting errors
         black . --check --verbose --diff
-    - name: Test with unittest
+    - name: Test
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
+        pip install --editable .
         python -m unittest --verbose
