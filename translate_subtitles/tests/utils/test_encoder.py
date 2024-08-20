@@ -4,7 +4,7 @@ import datetime
 import unittest
 import srt
 
-from translate_subtitles.tests.utils.converter import to_list
+from translate_subtitles.utils.converter import to_list
 from translate_subtitles.utils.encoder import decode_string, encode_chunk, encode_chunks
 
 

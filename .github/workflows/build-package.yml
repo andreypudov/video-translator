@@ -36,5 +36,7 @@ jobs:
         # stop the build if there are formatting errors
         black . --check --verbose --diff
     - name: Test with unittest
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python -m unittest --verbose
