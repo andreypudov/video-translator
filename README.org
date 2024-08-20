@@ -45,8 +45,9 @@ translate_subtitles \
 
 Extracting subtitles from the Leviathan with the English subtitles on the video:
 
-#+caption: The frame from the Leviathan.
-#+name:    leviathan-frame
+#+caption:   The frame from the Leviathan.
+#+name:      leviathan-frame
+#+attr_html: :align center
 [[./samples/leviathan.png]]
 
 #+begin_src shell
