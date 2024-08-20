@@ -6,7 +6,7 @@ import unittest
 import datetime
 import srt
 
-from translate_subtitles.tests.utils.converter import to_list
+from translate_subtitles.utils.converter import to_list
 from translate_subtitles.utils.chunks import (
     __max_token_limit_exceeded as max_token_limit_exceeded,
     __num_tokens_from_string as num_tokens_from_string,

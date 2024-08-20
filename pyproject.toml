@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "video-translator"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Andrey Pudov", email="mail@andreypudov.com" }
 ]
 description = "The collection of command-line utils to translate videos"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
@@ -19,7 +19,8 @@ classifiers = [
 dynamic = ["dependencies", "optional-dependencies"]
 
 [project.scripts]
-"generate_subtitles" = "generate_subtitles.generate_subtitles:main"
+"extract_subtitles" = "extract_subtitles.extract_subtitles:main"
+"transcribe_subtitles" = "transcribe_subtitles.transcribe_subtitles:main"
 "translate_subtitles" = "translate_subtitles.translate_subtitles:main"
 
 [project.urls]
@@ -27,7 +28,7 @@ Homepage = "https://github.com/andreypudov/video-translator"
 Issues = "https://github.com/andreypudov/video-translator/issues"
 
 [tool.setuptools]
-packages = ["generate_subtitles", "translate_subtitles"]
+packages = ["extract_subtitles", "transcribe_subtitles", "translate_subtitles"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}

@@ -11,10 +11,10 @@
 pip install video-translator
 #+end_src
 
-* Generate the subtitles for a video file
+* Extract subtitles
 
 #+begin_src shell
-generate_subtitles \
+extract_subtitles \
   --input-video input.mp4 \
   --output-subtitle input.srt \
   --input-language zh \
@@ -43,23 +43,28 @@ translate_subtitles \
 
 * Examples
 
+Extracting subtitles from the Leviathan with the English subtitles on the video:
+
+#+caption:   The frame from the Leviathan.
+#+name:      leviathan-frame
+#+attr_html: :align center
+[[./samples/leviathan.png]]
+
+#+begin_src shell
+extract_subtitles \
+  --input-video samples/leviathan.mp4 \
+  --output-subtitle samples/leviathan_extracted.en.srt \
+  --input-language ru \
+  --subtitle-area 80
+#+end_src
+
 Translating English subtitles to Russian and vice versa:
 
 #+begin_src shell
 export OPENAI_API_KEY=<value>
 translate_subtitles \
-  --input-subtitle samples/andrey_rublev_russian_subtitle.srt \
-  --output-subtitle samples/andrey_rublev_english_subtitle_auto.srt \
+  --input-subtitle samples/leviathan.ru.srt \
+  --output-subtitle samples/leviathan_translated.en.srt \
   --input-language ru \
   --output-language en
-#+end_src
-
-Generating a subtitle file for the Winnie the Pooh animation with the Russian subtitles on the video:
-
-#+begin_src shell
-generate_subtitles \
-  --input-video samples/winnie-the-pooh-russian.mp4 \
-  --output-subtitle samples/russia_subtitle.srt \
-  --input-language ru \
-  --subtitle-area 80
 #+end_src

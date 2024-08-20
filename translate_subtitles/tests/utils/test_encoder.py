@@ -4,7 +4,7 @@ import datetime
 import unittest
 import srt
 
-from translate_subtitles.tests.utils.converter import to_list
+from translate_subtitles.utils.converter import to_list
 from translate_subtitles.utils.encoder import decode_string, encode_chunk, encode_chunks
 
 
@@ -92,7 +92,8 @@ class TestEncoder(unittest.TestCase):
         """
         Test the decode_string function.
 
-        This test case verifies that the decode_string function correctly decodes the encoded string and returns the expected result.
+        This test case verifies that the decode_string function correctly decodes the encoded string and returns the
+        expected result.
         """
         actual = list(decode_string(self.encoded_string))
         self.assertEqual(
