@@ -4,7 +4,7 @@ from datetime import timedelta
 from paddleocr import PaddleOCR
 
 
-def generate_subtitle(frames_dir: str, language: str, subtitle_file: str):
+def extract_subtitle(frames_dir: str, language: str, subtitle_file: str):
     frame_imgs = os.listdir(frames_dir)
     frame_imgs.sort()
 

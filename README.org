@@ -11,10 +11,10 @@
 pip install video-translator
 #+end_src
 
-* Generate the subtitles for a video file
+* Extract the subtitles from a video file
 
 #+begin_src shell
-generate_subtitles \
+extract_subtitles \
   --input-video input.mp4 \
   --output-subtitle input.srt \
   --input-language zh \
@@ -54,10 +54,10 @@ translate_subtitles \
   --output-language en
 #+end_src
 
-Generating a subtitle file for the Winnie the Pooh animation with the Russian subtitles on the video:
+Extract subtitles from the Winnie the Pooh animation with the Russian subtitles on the video:
 
 #+begin_src shell
-generate_subtitles \
+extract_subtitles \
   --input-video samples/winnie-the-pooh-russian.mp4 \
   --output-subtitle samples/russia_subtitle.srt \
   --input-language ru \

@@ -5,15 +5,6 @@
 #+author: Pei Pei Chen
 #+language: en
 
-# Perform an editable installation
-
-#+begin_src shell
-pip install --editable .
-
-generate_subtitles --help
-translate_subtitles --help
-#+end_src
-
 # Generating distribution archives
 
 #+begin_src shell
@@ -33,7 +24,7 @@ python -m venv venv_test
 source venv_test/bin/activate
 pip install -i https://test.pypi.org/simple/ video-translator
 
-generate_subtitles --help
+extract_subtitles --help
 translate_subtitles --help
 #+end_src
 

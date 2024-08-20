@@ -1,22 +1,22 @@
-""" Generate the subtitles file a video file. """
+""" Extract subtitles from a video file. """
 
 import argparse
 import sys
 import os
-from generate_subtitles.utils.mapper import get_writing_system
-from generate_subtitles.utils.video_converter import convert_to_images
-from generate_subtitles.utils.subtitle_ocr import generate_subtitle
+from extract_subtitles.utils.mapper import get_writing_system
+from extract_subtitles.utils.video_converter import convert_to_images
+from extract_subtitles.utils.extractor import extract_subtitle
 
 
 def __parse_arguments() -> argparse.Namespace:
     """
-    Parse command-line arguments for generating subtitles script.
+    Parse command-line arguments for extracting subtitles script.
 
     Returns:
         arguments: An object containing the parsed command-line arguments.
     """
     parser = argparse.ArgumentParser(
-        prog="generate_subtitles", description="Generate subtitles from a video file"
+        prog="extract_subtitles", description="Extract subtitles from a video file"
     )
 
     parser.add_argument(
@@ -72,7 +72,7 @@ FRAMES_DIR = "frames"
 
 def main():
     """
-    Main function for generating subtitles from a video.
+    Main function for extracting subtitles from a video.
 
     Args:
         None
@@ -86,7 +86,7 @@ def main():
     __check_arguments(args, language)
 
     convert_to_images(args.input_video, FRAMES_DIR, y1_percent=int(args.subtitle_area))
-    generate_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)
+    extract_subtitle(FRAMES_DIR, args.input_language, args.output_subtitle)
 
 
 if __name__ == "__main__":
