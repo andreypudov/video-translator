@@ -2,6 +2,7 @@
 
 from unittest import mock
 
+import os
 import unittest
 import datetime
 import srt
@@ -16,6 +17,7 @@ from translate_subtitles.utils.chunks import (
 )
 
 
+@unittest.skipUnless(os.getenv("TEST_TYPE") == "unit", "Skipping non-unit tests")
 class TestChunks(unittest.TestCase):
     """
     Unit test suite for the chunks module.

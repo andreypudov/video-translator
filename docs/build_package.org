@@ -5,19 +5,19 @@
 #+author: Pei Pei Chen
 #+language: en
 
-# Generating distribution archives
+* Generating distribution archives
 
 #+begin_src shell
 python3 -m build
 #+end_src
 
-# Uploading the distribution archives to the test index
+* Uploading the distribution archives to the test index
 
 #+begin_src shell
 python3 -m twine upload --repository testpypi dist/*
 #+end_src
 
-# Test the package
+* Testing the package
 
 #+begin_src shell
 python -m venv venv_test
@@ -29,7 +29,7 @@ transcribe_subtitles --help
 translate_subtitles --help
 #+end_src
 
-# Uploading the distribution archives to the prod index
+* Uploading the distribution archives to the prod index
 
 #+begin_src shell
 python3 -m twine upload dist/*

@@ -1,10 +1,12 @@
 """ Test the models module. """
 
+import os
 import unittest
 
 from translate_subtitles.utils.models import TRANSLATION_MODEL
 
 
+@unittest.skipUnless(os.getenv("TEST_TYPE") == "unit", "Skipping non-unit tests")
 class TestModels(unittest.TestCase):
     """
     Unit test suite for the models module.

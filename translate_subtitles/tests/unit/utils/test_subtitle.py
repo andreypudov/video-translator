@@ -2,6 +2,7 @@
 
 from unittest import mock
 
+import os
 import datetime
 import unittest
 import srt
@@ -58,6 +59,7 @@ ANDREY_RUBLEV_CONTENT_2 = (
 )
 
 
+@unittest.skipUnless(os.getenv("TEST_TYPE") == "unit", "Skipping non-unit tests")
 class TestSubtitle(unittest.TestCase):
     """
     Unit test suite for the subtitle module.
