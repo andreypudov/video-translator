@@ -5,11 +5,23 @@
 #+author: Pei Pei Chen
 #+language: en
 
-# Perform an editable installation
+* Performing an editable installation
 
 #+begin_src shell
 pip install --editable .
 
 extract_subtitles --help
 translate_subtitles --help
+#+end_src
+
+* Running unit tests
+
+#+begin_src shell
+TEST_TYPE=unit python -m unittest discover --verbose
+#+end_src
+
+* Running integration tests
+
+#+begin_src shell
+TEST_TYPE=integration python -m unittest discover --verbose
 #+end_src

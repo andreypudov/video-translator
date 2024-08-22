@@ -40,4 +40,5 @@ jobs:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         pip install --editable .
-        python -m unittest --verbose
+        TEST_TYPE=unit python -m unittest discover --verbose
+        TEST_TYPE=integration python -m unittest discover --verbose

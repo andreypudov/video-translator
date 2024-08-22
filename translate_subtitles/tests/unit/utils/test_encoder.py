@@ -1,5 +1,6 @@
 """ Test the encoder module. """
 
+import os
 import datetime
 import unittest
 import srt
@@ -8,6 +9,7 @@ from translate_subtitles.utils.converter import to_list
 from translate_subtitles.utils.encoder import decode_string, encode_chunk, encode_chunks
 
 
+@unittest.skipUnless(os.getenv("TEST_TYPE") == "unit", "Skipping non-unit tests")
 class TestEncoder(unittest.TestCase):
     """
     Unit test suite for the encoder module.
